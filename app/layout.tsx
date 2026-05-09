@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import ButterflyEffect from "@/components/ButterflyEffect";
 
 export const metadata: Metadata = {
   title: "Vanshika Srivastava — Portfolio",
@@ -22,7 +23,10 @@ export default function RootLayout({
           rel="stylesheet"
         />
       </head>
-      <body>{children}</body>
+      <body>
+        <ButterflyEffect />
+        {children}
+      </body>
     </html>
   );
 }
