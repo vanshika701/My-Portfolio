@@ -34,7 +34,7 @@ export default function ButterflyEffect() {
       active++;
 
       const c   = getColors();
-      const a   = (Math.random() * 0.20 + 0.74).toFixed(2);        // 0.74 – 0.94
+      const a   = (Math.random() * 0.15 + 0.48).toFixed(2);        // 0.48 – 0.63
       const aH  = (parseFloat(a) * 0.80).toFixed(2);               // hindwing slightly softer
       const sc  = Math.random() * 0.30 + 0.65;                     // 0.65 – 0.95  (~29–42 px)
       const spd = (Math.random() * 100 + 185) + 'ms';
@@ -113,7 +113,7 @@ export default function ButterflyEffect() {
 
         svg.style.left      = (sx + dx * e) + 'px';
         svg.style.top       = (sy + dy * e) + 'px';
-        svg.style.opacity   = (op * 0.92).toFixed(3);
+        svg.style.opacity   = (op * 0.58).toFixed(3);
         svg.style.transform = `scale(${sc}) rotate(${rot * Math.sin(t * Math.PI)}deg)`;
 
         if (t < 1) requestAnimationFrame(tick);

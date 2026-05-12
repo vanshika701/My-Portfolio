@@ -4,6 +4,39 @@ import * as THREE from "three";
 
 interface Props { revealed: boolean }
 
+/* ── Word-by-word reveal ─────────────────────────────────── */
+function WordReveal({ text, active, startDelayMs = 300 }: { text: string; active: boolean; startDelayMs?: number }) {
+  const words = text.split(" ");
+  return (
+    <p style={{
+      fontFamily: "'Playfair Display', serif",
+      fontStyle: "italic",
+      fontWeight: 300,
+      fontSize: "clamp(0.88rem, 1.5vw, 1.1rem)",
+      lineHeight: 1.65,
+      color: "var(--text-secondary)",
+      display: "flex",
+      flexWrap: "wrap",
+      gap: "0 0.28em",
+      maxWidth: "640px",
+    }}>
+      {words.map((word, i) => (
+        <span
+          key={i}
+          style={{
+            display: "inline-block",
+            opacity: active ? 1 : 0,
+            transform: active ? "translateY(0)" : "translateY(12px)",
+            transition: `opacity 0.5s ease ${startDelayMs + i * 65}ms, transform 0.5s cubic-bezier(0.25,0.1,0.25,1) ${startDelayMs + i * 65}ms`,
+          }}
+        >
+          {word}
+        </span>
+      ))}
+    </p>
+  );
+}
+
 export default function Hero({ revealed }: Props) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
@@ -66,37 +99,41 @@ export default function Hero({ revealed }: Props) {
         style={{
           minHeight: "100svh",
           padding: "clamp(2rem, 4vw, 4rem) clamp(2rem, 4vw, 4rem) clamp(2.5rem, 4vw, 4rem)",
-          paddingRight: "clamp(2rem, 4vw, 4rem)", /* nav is fixed; no extra offset needed */
         }}
       >
 
         {/* ── Top: eyebrow ─────────────────────────────── */}
         <div style={fade(0)}>
-          <p
-            className="font-sans font-extralight tracking-[0.35em] uppercase"
-            style={{ fontSize: "0.62rem", color: "var(--text-muted)" }}
-          >
+          <p style={{
+            fontFamily: "var(--font-sans)",
+            fontWeight: 300,
+            letterSpacing: "0.35em",
+            textTransform: "uppercase",
+            fontSize: "0.68rem",
+            color: "var(--text-muted)",
+          }}>
             Portfolio — 2025
           </p>
         </div>
 
-        {/* ── Centre: name ─────────────────────────────── */}
+        {/* ── Centre: name + tagline ───────────────────── */}
         <div style={{ margin: "auto 0", paddingTop: "1rem" }}>
+
           {/* VANSHIKA — FLIP target #hero-first */}
           <div style={{ lineHeight: 0.88, marginBottom: "0.04em" }}>
             <span
               id="hero-first"
               style={{
-                display:     "inline-block",
-                fontFamily:  "'Playfair Display', serif",
-                fontWeight:  900,
-                fontSize:    "clamp(4.5rem, 14vw, 15rem)",
-                lineHeight:  0.88,
+                display:       "inline-block",
+                fontFamily:    "'Playfair Display', serif",
+                fontWeight:    900,
+                fontSize:      "clamp(3.8rem, 11vw, 12rem)",
+                lineHeight:    0.88,
                 letterSpacing: "-0.02em",
                 textTransform: "uppercase",
-                color:       "var(--text-primary)",
-                opacity:     0,
-                willChange:  "transform, opacity",
+                color:         "var(--text-primary)",
+                opacity:       0,
+                willChange:    "transform, opacity",
               }}
             >
               Vanshika
@@ -108,20 +145,29 @@ export default function Hero({ revealed }: Props) {
             <span
               id="hero-last"
               style={{
-                display:     "inline-block",
-                fontFamily:  "'Playfair Display', serif",
-                fontWeight:  400,
-                fontStyle:   "italic",
-                fontSize:    "clamp(3.5rem, 11vw, 12rem)",
-                lineHeight:  0.88,
+                display:       "inline-block",
+                fontFamily:    "'Playfair Display', serif",
+                fontWeight:    400,
+                fontStyle:     "italic",
+                fontSize:      "clamp(2.8rem, 8.5vw, 9rem)",
+                lineHeight:    0.88,
                 letterSpacing: "0.01em",
-                color:       "var(--accent)",
-                opacity:     0,
-                willChange:  "transform, opacity",
+                color:         "var(--accent)",
+                opacity:       0,
+                willChange:    "transform, opacity",
               }}
             >
               Srivastava
             </span>
+          </div>
+
+          {/* Tagline — word-by-word reveal */}
+          <div style={{ marginTop: "1.8rem" }}>
+            <WordReveal
+              text="When I'm not writing code, I'm playing Sudoku. Logic never takes a break."
+              active={revealed}
+              startDelayMs={300}
+            />
           </div>
         </div>
 
@@ -129,17 +175,27 @@ export default function Hero({ revealed }: Props) {
         <div className="flex items-end justify-between flex-wrap gap-8">
 
           {/* Bottom-left: descriptor + CTAs + ornament */}
-          <div style={{ maxWidth: "420px" }}>
-            <p
-              className="font-sans font-extralight tracking-[0.12em]"
-              style={{ fontSize: "clamp(0.65rem, 1.1vw, 0.78rem)", color: "var(--text-muted)", marginBottom: "0.6rem", ...fade(120) }}
-            >
+          <div style={{ maxWidth: "460px" }}>
+            <p style={{
+              fontFamily: "var(--font-sans)",
+              fontWeight: 300,
+              letterSpacing: "0.1em",
+              fontSize: "clamp(0.88rem, 1.4vw, 1rem)",
+              color: "var(--text-muted)",
+              marginBottom: "0.6rem",
+              ...fade(120),
+            }}>
               Full-Stack Developer · Security Researcher · ML Engineer
             </p>
-            <p
-              className="font-sans font-extralight tracking-[0.1em]"
-              style={{ fontSize: "clamp(0.6rem, 1vw, 0.72rem)", color: "var(--text-muted)", marginBottom: "1.8rem", ...fade(180) }}
-            >
+            <p style={{
+              fontFamily: "var(--font-sans)",
+              fontWeight: 300,
+              letterSpacing: "0.06em",
+              fontSize: "clamp(0.82rem, 1.3vw, 0.95rem)",
+              color: "var(--text-muted)",
+              marginBottom: "1.8rem",
+              ...fade(180),
+            }}>
               B.Tech CSE @ Shiv Nadar University &nbsp;·&nbsp; CGPA 8.00 &nbsp;·&nbsp; 2023 – 2027
             </p>
             <div className="flex flex-wrap gap-3" style={fade(260)}>
@@ -157,23 +213,18 @@ export default function Hero({ revealed }: Props) {
             </div>
           </div>
 
-          {/* Bottom-right: role display text (mirrors reference "CREATIVE DIRECTOR") */}
-          <div
-            className="hidden md:block text-right"
-            style={{ ...fade(80) }}
-          >
-            <p
-              style={{
-                fontFamily:  "'Playfair Display', serif",
-                fontWeight:  700,
-                fontStyle:   "italic",
-                fontSize:    "clamp(2rem, 5vw, 5.5rem)",
-                lineHeight:  0.9,
-                color:       "var(--text-primary)",
-                opacity:     0.12,
-                letterSpacing: "-0.01em",
-              }}
-            >
+          {/* Bottom-right: role display watermark */}
+          <div className="hidden md:block text-right" style={{ ...fade(80) }}>
+            <p style={{
+              fontFamily:    "'Playfair Display', serif",
+              fontWeight:    700,
+              fontStyle:     "italic",
+              fontSize:      "clamp(2rem, 5vw, 5.5rem)",
+              lineHeight:    0.9,
+              color:         "var(--text-primary)",
+              opacity:       0.12,
+              letterSpacing: "-0.01em",
+            }}>
               Full-Stack<br />Developer
             </p>
           </div>
@@ -186,7 +237,14 @@ export default function Hero({ revealed }: Props) {
         className="absolute bottom-6 left-1/2 flex flex-col items-center gap-2 animate-scroll-bounce"
         style={fade(500)}
       >
-        <span className="font-sans font-extralight text-[0.55rem] tracking-[0.3em] uppercase" style={{ color: "var(--text-muted)" }}>
+        <span style={{
+          fontFamily: "var(--font-sans)",
+          fontWeight: 300,
+          fontSize: "0.62rem",
+          letterSpacing: "0.3em",
+          textTransform: "uppercase",
+          color: "var(--text-muted)",
+        }}>
           Scroll
         </span>
         <div className="w-px h-8" style={{ background: "linear-gradient(to bottom, var(--accent-light), transparent)" }} />
@@ -227,10 +285,10 @@ function HeroBtn({ children, primary, onClick }: { children: React.ReactNode; pr
       }}
       onMouseLeave={(e) => {
         const el = e.currentTarget;
-        el.style.transform  = "translate(0,0)";
-        el.style.transition = "transform 0.55s cubic-bezier(0.25,0.1,0.25,1), background 0.4s, color 0.4s, border-color 0.4s";
-        el.style.background = "transparent";
-        el.style.color      = primary ? "var(--accent)" : "var(--text-secondary)";
+        el.style.transform   = "translate(0,0)";
+        el.style.transition  = "transform 0.55s cubic-bezier(0.25,0.1,0.25,1), background 0.4s, color 0.4s, border-color 0.4s";
+        el.style.background  = "transparent";
+        el.style.color       = primary ? "var(--accent)" : "var(--text-secondary)";
         el.style.borderColor = primary ? "var(--accent)" : "var(--border)";
       }}
       onMouseEnter={(e) => {
@@ -240,17 +298,17 @@ function HeroBtn({ children, primary, onClick }: { children: React.ReactNode; pr
         el.style.borderColor = primary ? "var(--accent)" : "var(--text-secondary)";
       }}
       style={{
-        fontFamily:   "'Jost', sans-serif",
-        fontWeight:   300,
-        fontSize:     "0.68rem",
+        fontFamily:    "var(--font-sans)",
+        fontWeight:    400,
+        fontSize:      "0.72rem",
         letterSpacing: "0.22em",
         textTransform: "uppercase",
-        padding:      "0.8rem 2rem",
-        border:       "1px solid",
-        borderColor:  primary ? "var(--accent)" : "var(--border)",
-        color:        primary ? "var(--accent)" : "var(--text-secondary)",
-        background:   "transparent",
-        cursor:       "pointer",
+        padding:       "0.8rem 2rem",
+        border:        "1px solid",
+        borderColor:   primary ? "var(--accent)" : "var(--border)",
+        color:         primary ? "var(--accent)" : "var(--text-secondary)",
+        background:    "transparent",
+        cursor:        "pointer",
       }}
     >{children}</button>
   );

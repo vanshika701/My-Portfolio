@@ -23,8 +23,8 @@ const groups = [
 ];
 
 export default function Skills() {
-  const labelR  = useReveal();
-  const titleR  = useReveal();
+  const labelR   = useReveal();
+  const titleR   = useReveal();
   const marqueeR = useReveal();
 
   return (
@@ -58,7 +58,7 @@ export default function Skills() {
             overflow: "hidden",
             borderTop: "1px solid var(--border)",
             borderBottom: "1px solid var(--border)",
-            padding: "1.4rem 0",
+            padding: "1.6rem 0",
             marginBottom: "4rem",
           }}
         >
@@ -66,8 +66,17 @@ export default function Skills() {
             {[...marqueeItems, ...marqueeItems].map((item, i) => (
               <span
                 key={i}
-                className="inline-flex items-center gap-10 px-10 font-serif font-light italic text-lg"
-                style={{ color: "var(--text-muted)" }}
+                style={{
+                  display: "inline-flex",
+                  alignItems: "center",
+                  gap: "2.5rem",
+                  padding: "0 2.5rem",
+                  fontFamily: "'Playfair Display', serif",
+                  fontStyle: "italic",
+                  fontWeight: 300,
+                  fontSize: "1.1rem",
+                  color: "var(--text-muted)",
+                }}
               >
                 {item}
                 <span style={{ color: "var(--accent-light)" }}>·</span>
@@ -97,30 +106,40 @@ function SkillGroup({
   const { ref, style } = useReveal();
   return (
     <div ref={ref} style={{ ...style, transitionDelay: `${delay}ms` }}>
-      <div
-        className="font-sans font-extralight text-[0.63rem] tracking-[0.3em] uppercase mb-5"
-        style={{ color: "var(--accent)" }}
-      >
+      <div style={{
+        fontFamily: "var(--font-sans)",
+        fontWeight: 500,
+        fontSize: "0.82rem",
+        letterSpacing: "0.3em",
+        textTransform: "uppercase",
+        color: "var(--accent)",
+        marginBottom: "1.25rem",
+      }}>
         {group.title}
       </div>
-      <div className="flex flex-col">
+      <div style={{ display: "flex", flexDirection: "column" }}>
         {group.items.map((item) => (
           <div
             key={item}
-            className="flex justify-between items-center py-2.5 font-sans font-light text-[0.82rem] tracking-[0.05em] group cursor-default"
             style={{
+              fontFamily: "var(--font-sans)",
+              fontWeight: 300,
+              fontSize: "0.95rem",
+              letterSpacing: "0.04em",
               borderBottom: "1px solid var(--border)",
               color: "var(--text-secondary)",
               transition: "color 0.3s ease",
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "center",
+              padding: "0.75rem 0",
+              cursor: "default",
             }}
             onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.color = "var(--text-primary)"; }}
             onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.color = "var(--text-secondary)"; }}
           >
             {item}
-            <span
-              className="block w-1 h-1 rounded-full"
-              style={{ background: "var(--accent-light)" }}
-            />
+            <span style={{ display: "block", width: "5px", height: "5px", borderRadius: "50%", background: "var(--accent-light)" }} />
           </div>
         ))}
       </div>

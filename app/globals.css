@@ -17,6 +17,9 @@
   --tag-bg: rgba(201, 133, 106, 0.15);
   --tag-border: rgba(201, 133, 106, 0.35);
   --grain-opacity: 0.045;
+
+  /* ── Font — change this one line to revert to Jost ────── */
+  --font-sans: 'Quicksand', system-ui, sans-serif;
 }
 
 [data-theme="white"] {
@@ -43,7 +46,7 @@ html {
 body {
   background: var(--bg);
   color: var(--text-primary);
-  font-family: 'Jost', sans-serif;
+  font-family: var(--font-sans);
   font-weight: 300;
   overflow-x: hidden;
   transition: background 0.8s cubic-bezier(0.25, 0.1, 0.25, 1),
@@ -77,12 +80,12 @@ body::before {
 
 /* ── Utility classes ────────────────────────────────────── */
 .font-serif { font-family: 'Playfair Display', Georgia, serif; }
-.font-sans  { font-family: 'Jost', system-ui, sans-serif; }
+.font-sans  { font-family: var(--font-sans); }
 
 .section-label {
-  font-family: 'Jost', sans-serif;
-  font-weight: 200;
-  font-size: 0.65rem;
+  font-family: var(--font-sans);
+  font-weight: 400;
+  font-size: 0.72rem;
   letter-spacing: 0.35em;
   text-transform: uppercase;
   color: var(--text-muted);

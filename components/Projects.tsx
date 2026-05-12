@@ -1,5 +1,7 @@
 "use client";
+import { useRef, useState } from "react";
 import { useReveal } from "@/lib/useReveal";
+import CardPopup from "./CardPopup";
 
 const projects = [
   {
@@ -76,6 +78,31 @@ function ProjectCard({
   delay: number;
 }) {
   const { ref, style } = useReveal();
+  const [popupOpen, setPopupOpen] = useState(false);
+  const clickOpenedRef = useRef(false);
+  const hoverTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  const startHover = () => {
+    hoverTimer.current = setTimeout(() => {
+      if (!clickOpenedRef.current) setPopupOpen(true);
+    }, 2500);
+  };
+
+  const clearHover = () => {
+    if (hoverTimer.current) clearTimeout(hoverTimer.current);
+  };
+
+  const handleClick = () => {
+    clearHover();
+    const next = !clickOpenedRef.current;
+    clickOpenedRef.current = next;
+    setPopupOpen(next);
+  };
+
+  const handleClose = () => {
+    clickOpenedRef.current = false;
+    setPopupOpen(false);
+  };
 
   const onMove = (e: React.MouseEvent<HTMLDivElement>) => {
     const el = e.currentTarget;
@@ -94,6 +121,8 @@ function ProjectCard({
     el.style.boxShadow  = "none";
     el.style.background   = "var(--bg-card)";
     el.style.borderColor  = "var(--border)";
+    clearHover();
+    if (!clickOpenedRef.current) setPopupOpen(false);
   };
 
   return (
@@ -105,7 +134,7 @@ function ProjectCard({
         background: "var(--bg-card)",
         border: "1px solid var(--border)",
         padding: "2.5rem",
-        cursor: "default",
+        cursor: "pointer",
         transformStyle: "preserve-3d",
         willChange: "transform",
       }}
@@ -114,38 +143,55 @@ function ProjectCard({
       onMouseEnter={(e) => {
         e.currentTarget.style.background  = "var(--bg-card-hover)";
         e.currentTarget.style.borderColor = "var(--accent-light)";
+        startHover();
       }}
+      onClick={handleClick}
     >
-      <div
-        className="font-serif font-light italic text-[0.75rem] tracking-[0.15em] mb-5"
-        style={{ color: "var(--text-muted)" }}
-      >
+      <div style={{
+        fontFamily: "'Playfair Display', serif",
+        fontStyle: "italic",
+        fontWeight: 300,
+        fontSize: "0.82rem",
+        letterSpacing: "0.15em",
+        color: "var(--text-muted)",
+        marginBottom: "1.25rem",
+      }}>
         {project.num}
       </div>
-      <h3
-        style={{
-          fontFamily: "'Playfair Display', serif",
-          fontWeight: 400,
-          fontSize: "1.5rem",
-          lineHeight: 1.2,
-          color: "var(--text-primary)",
-          marginBottom: "0.9rem",
-        }}
-      >
+
+      <h3 style={{
+        fontFamily: "'Playfair Display', serif",
+        fontWeight: 400,
+        fontSize: "1.5rem",
+        lineHeight: 1.2,
+        color: "var(--text-primary)",
+        marginBottom: "0.9rem",
+      }}>
         {project.title}
       </h3>
-      <p
-        className="font-sans font-light text-[0.8rem] leading-[1.75] mb-6"
-        style={{ color: "var(--text-secondary)" }}
-      >
+
+      <p style={{
+        fontFamily: "var(--font-sans)",
+        fontWeight: 300,
+        fontSize: "0.92rem",
+        lineHeight: 1.75,
+        color: "var(--text-secondary)",
+        marginBottom: "1.5rem",
+      }}>
         {project.desc}
       </p>
-      <div className="flex flex-wrap gap-2 mb-5">
+
+      <div style={{ display: "flex", flexWrap: "wrap", gap: "0.5rem", marginBottom: "1.25rem" }}>
         {project.tags.map((t) => (
           <span
             key={t}
-            className="font-sans font-extralight text-[0.58rem] tracking-[0.18em] uppercase px-2.5 py-1 rounded-sm"
             style={{
+              fontFamily: "var(--font-sans)",
+              fontWeight: 400,
+              fontSize: "0.68rem",
+              letterSpacing: "0.18em",
+              textTransform: "uppercase",
+              padding: "0.25rem 0.65rem",
               color: "var(--accent)",
               border: "1px solid var(--tag-border)",
               background: "var(--tag-bg)",
@@ -155,13 +201,43 @@ function ProjectCard({
           </span>
         ))}
       </div>
-      <div
-        className="font-serif italic text-[0.82rem] flex items-center gap-3"
-        style={{ color: "var(--text-muted)" }}
-      >
-        <span className="block h-px w-5" style={{ background: "var(--accent-light)" }} />
+
+      <div style={{
+        fontFamily: "'Playfair Display', serif",
+        fontStyle: "italic",
+        fontSize: "0.88rem",
+        color: "var(--text-muted)",
+        display: "flex",
+        alignItems: "center",
+        gap: "0.75rem",
+      }}>
+        <span style={{ display: "block", height: "1px", width: "20px", background: "var(--accent-light)" }} />
         {project.stat}
       </div>
+
+      {/* Click hint */}
+      <div style={{
+        marginTop: "1.2rem",
+        fontFamily: "var(--font-sans)",
+        fontSize: "0.62rem",
+        letterSpacing: "0.2em",
+        textTransform: "uppercase",
+        color: "var(--text-muted)",
+        opacity: 0.5,
+        display: "flex",
+        alignItems: "center",
+        gap: "0.4rem",
+      }}>
+        <span style={{ width: "14px", height: "1px", background: "var(--accent-light)", display: "inline-block" }} />
+        click to expand
+      </div>
+
+      <CardPopup
+        open={popupOpen}
+        onClose={handleClose}
+        title={project.title}
+        subtitle={project.num}
+      />
     </div>
   );
 }

@@ -15,9 +15,9 @@ interface Props {
 }
 
 const linkStyle: React.CSSProperties = {
-  fontFamily:     "'Jost', sans-serif",
-  fontWeight:     200,
-  fontSize:       "clamp(0.52rem, 0.9vw, 0.62rem)",
+  fontFamily:     "var(--font-sans)",
+  fontWeight:     300,
+  fontSize:       "clamp(0.68rem, 1.1vw, 0.82rem)",
   letterSpacing:  "0.22em",
   textTransform:  "uppercase",
   color:          "var(--text-secondary)",

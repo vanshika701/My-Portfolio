@@ -55,8 +55,8 @@ function AchievementRow({ index, text, delay }: { index: number; text: string; d
         transitionDelay: `${delay}ms`,
         display: "grid",
         gridTemplateColumns: "auto 1fr",
-        gap: "2rem",
-        padding: "1.8rem 0",
+        gap: "2.5rem",
+        padding: "2.2rem 0",
         borderBottom: "1px solid var(--border)",
         cursor: "default",
         transition: (style.transition ?? "") + ", opacity 0.3s ease",
@@ -71,15 +71,28 @@ function AchievementRow({ index, text, delay }: { index: number; text: string; d
         if (title) title.style.color = "var(--text-primary)";
       }}
     >
-      <div
-        className="font-serif font-light italic text-[0.82rem]"
-        style={{ color: "var(--text-muted)", minWidth: "2.5rem", paddingTop: "2px" }}
-      >
+      <div style={{
+        fontFamily: "'Playfair Display', serif",
+        fontWeight: 300,
+        fontStyle: "italic",
+        fontSize: "0.95rem",
+        color: "var(--text-muted)",
+        minWidth: "2.5rem",
+        paddingTop: "2px",
+      }}>
         {String(index).padStart(2, "0")}
       </div>
       <div
-        className="ach-title font-sans font-light text-[0.86rem] leading-relaxed tracking-[0.04em]"
-        style={{ color: "var(--text-primary)", transition: "color 0.3s ease" }}
+        className="ach-title"
+        style={{
+          fontFamily: "var(--font-sans)",
+          fontWeight: 400,
+          fontSize: "1rem",
+          lineHeight: 1.7,
+          letterSpacing: "0.03em",
+          color: "var(--text-primary)",
+          transition: "color 0.3s ease",
+        }}
       >
         {text}
       </div>
