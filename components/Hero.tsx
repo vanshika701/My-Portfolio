@@ -185,7 +185,7 @@ export default function Hero({ revealed }: Props) {
               marginBottom: "0.6rem",
               ...fade(120),
             }}>
-              Full-Stack Developer · Security Researcher · ML Engineer
+              Full-Stack Developer · ML Engineer
             </p>
             <p style={{
               fontFamily: "var(--font-sans)",
@@ -225,7 +225,7 @@ export default function Hero({ revealed }: Props) {
               opacity:       0.12,
               letterSpacing: "-0.01em",
             }}>
-              Full-Stack<br />Developer
+              Software Engineer<br />in training
             </p>
           </div>
 
