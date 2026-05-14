@@ -4,18 +4,18 @@
 
 /* ── CSS Variables ──────────────────────────────────────── */
 :root {
-  --bg: #f9eee8;
-  --bg-card: #f3e0d8;
-  --bg-card-hover: #edd4ca;
-  --accent: #c9856a;
-  --accent-light: #e8b5a2;
-  --text-primary: #3a2218;
-  --text-secondary: #7a5548;
-  --text-muted: #b08070;
-  --border: rgba(58, 34, 24, 0.12);
-  --nav-bg: rgba(249, 238, 232, 0.85);
-  --tag-bg: rgba(201, 133, 106, 0.15);
-  --tag-border: rgba(201, 133, 106, 0.35);
+  --bg: #fdf0f5;
+  --bg-card: #f8dced;
+  --bg-card-hover: #f3cbe2;
+  --accent: #d4688f;
+  --accent-light: #e8a8c0;
+  --text-primary: #3a1828;
+  --text-secondary: #7a4060;
+  --text-muted: #b07090;
+  --border: rgba(58, 24, 40, 0.12);
+  --nav-bg: rgba(253, 240, 245, 0.85);
+  --tag-bg: rgba(212, 104, 143, 0.15);
+  --tag-border: rgba(212, 104, 143, 0.35);
   --grain-opacity: 0.045;
 
   /* ── Font — change this one line to revert to Jost ────── */
@@ -23,18 +23,18 @@
 }
 
 [data-theme="white"] {
-  --bg: #f5f2ee;
-  --bg-card: #ede9e3;
-  --bg-card-hover: #e3ddd5;
-  --accent: #8a7060;
-  --accent-light: #b8a898;
-  --text-primary: #2a2018;
-  --text-secondary: #6a5848;
-  --text-muted: #9a8878;
-  --border: rgba(42, 32, 24, 0.1);
-  --nav-bg: rgba(245, 242, 238, 0.85);
-  --tag-bg: rgba(138, 112, 96, 0.12);
-  --tag-border: rgba(138, 112, 96, 0.3);
+  --bg: #faf5f8;
+  --bg-card: #f2e4ec;
+  --bg-card-hover: #e8d5e2;
+  --accent: #b05878;
+  --accent-light: #cea0b5;
+  --text-primary: #2a1820;
+  --text-secondary: #6a4055;
+  --text-muted: #9a7085;
+  --border: rgba(42, 24, 32, 0.1);
+  --nav-bg: rgba(250, 245, 248, 0.85);
+  --tag-bg: rgba(176, 88, 120, 0.12);
+  --tag-border: rgba(176, 88, 120, 0.3);
   --grain-opacity: 0.04;
 }
 

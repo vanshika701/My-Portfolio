@@ -118,9 +118,9 @@ function ProjectCard({
     const el = e.currentTarget;
     el.style.transform  = "perspective(1200px) rotateX(0) rotateY(0) translateZ(0) scale(1)";
     el.style.transition = "transform 0.6s cubic-bezier(0.25,0.1,0.25,1), background 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease";
-    el.style.boxShadow  = "none";
-    el.style.background   = "var(--bg-card)";
-    el.style.borderColor  = "var(--border)";
+    el.style.boxShadow  = "0 4px 24px rgba(212,104,143,0.08)";
+    el.style.background   = "rgba(255,255,255,0.45)";
+    el.style.borderColor  = "rgba(255,255,255,0.6)";
     clearHover();
     if (!clickOpenedRef.current) setPopupOpen(false);
   };
@@ -131,8 +131,11 @@ function ProjectCard({
       style={{
         ...style,
         transitionDelay: `${delay}ms`,
-        background: "var(--bg-card)",
-        border: "1px solid var(--border)",
+        background: "rgba(255,255,255,0.45)",
+        backdropFilter: "blur(12px)",
+        WebkitBackdropFilter: "blur(12px)",
+        border: "1px solid rgba(255,255,255,0.6)",
+        boxShadow: "0 4px 24px rgba(212,104,143,0.08)",
         padding: "2.5rem",
         cursor: "pointer",
         transformStyle: "preserve-3d",
@@ -141,8 +144,8 @@ function ProjectCard({
       onMouseMove={onMove}
       onMouseLeave={onLeave}
       onMouseEnter={(e) => {
-        e.currentTarget.style.background  = "var(--bg-card-hover)";
-        e.currentTarget.style.borderColor = "var(--accent-light)";
+        e.currentTarget.style.background  = "rgba(255,255,255,0.65)";
+        e.currentTarget.style.borderColor = "rgba(255,255,255,0.85)";
         startHover();
       }}
       onClick={handleClick}

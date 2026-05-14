@@ -50,7 +50,7 @@ export default function Hero({ revealed }: Props) {
     const camera = new THREE.PerspectiveCamera(45, 1, 0.1, 100);
     camera.position.z = 3;
     const geo = new THREE.PlaneGeometry(7, 5, 70, 45);
-    const mat = new THREE.MeshBasicMaterial({ color: 0xc9856a, wireframe: true, transparent: true, opacity: 0.18 });
+    const mat = new THREE.MeshBasicMaterial({ color: 0xd4688f, wireframe: true, transparent: true, opacity: 0.18 });
     scene.add(new THREE.Mesh(geo, mat));
     const pos = geo.attributes.position;
     const origZ = new Float32Array(pos.count);
