@@ -25,8 +25,8 @@ export default function ButterflyEffect() {
     function getColors() {
       const theme = document.documentElement.getAttribute('data-theme') || 'pink';
       return theme === 'white'
-        ? { fore: '108,82,64', hind: '138,106,86', body: '82,58,44', stroke: '75,52,38' }
-        : { fore: '192,108,80', hind: '218,145,112', body: '158,76,52', stroke: '148,68,44' };
+        ? { fore: '176,88,120', hind: '206,160,181', body: '106,64,85', stroke: '80,48,65' }
+        : { fore: '212,104,143', hind: '232,168,192', body: '160,72,110', stroke: '100,48,72' };
     }
 
     function spawn(x: number, y: number) {
